@@ -122,7 +122,13 @@ File `.github/workflows/deploy.yml` sudah disiapkan.
 - [ ] `npm run build` sukses
 - [ ] Website online dan URL dicatat
 
+<<<<<<< HEAD
 ## Riwayat Pengembangan
 
 Pengembangan fitur pengelolaan tugas dilakukan menggunakan Git
 dengan branch feature/task-management.
+=======
+## Pengembangan Dashboard
+Fitur dashboard dikembangkan untuk menampilkan statistik
+jumlah tugas, progres pengerjaan, prioritas, dan tenggat waktu.
+>>>>>>> feature/dashboard
