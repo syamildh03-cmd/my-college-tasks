@@ -121,3 +121,7 @@ File `.github/workflows/deploy.yml` sudah disiapkan.
 - [ ] `.gitignore` berisi `.env`; `.env.example` ter-upload
 - [ ] `npm run build` sukses
 - [ ] Website online dan URL dicatat
+
+## Pengembangan Dashboard
+Fitur dashboard dikembangkan untuk menampilkan statistik
+jumlah tugas, progres pengerjaan, prioritas, dan tenggat waktu.
