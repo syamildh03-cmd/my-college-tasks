@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>My College Tasks</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="logo">✓</span><span id="app-name">My College Tasks</span><small id="app-version"></small></div>
+      <nav>
+        <button data-view="dashboard" class="active">📊 Dashboard</button>
+        <button data-view="tasks">📝 Tugas</button>
+        <button data-view="about">ℹ️ Tentang Proyek</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="view-dashboard" class="view">
+        <div class="head"><div><h1>Dashboard</h1><p class="muted">Ringkasan progres tugas kuliahmu.</p></div>
+          <button class="btn primary" data-open-form>＋ Tambah Tugas</button></div>
+        <div class="grid stats">
+          <div class="card stat"><div class="label">Total Tugas</div><div class="num" id="stat-total">0</div></div>
+          <div class="card stat"><div class="label">Belum Selesai</div><div class="num" id="stat-pending">0</div></div>
+          <div class="card stat"><div class="label">Selesai</div><div class="num" id="stat-done">0</div></div>
+          <div class="card stat"><div class="label">Persentase Selesai</div><div class="num" id="stat-percent">0%</div>
+            <div class="progress"><div id="progress-bar"></div></div></div>
+        </div>
+        <div class="grid two">
+          <div class="card"><h2>Ringkasan Prioritas</h2><div id="priority-summary"></div></div>
+          <div class="card"><h2>Deadline Terdekat</h2><div id="upcoming-list"></div></div>
+        </div>
+      </section>
+
+      <section id="view-tasks" class="view" hidden>
+        <div class="head"><div><h1>Daftar Tugas</h1><p class="muted">Cari, filter, dan kelola semua tugasmu.</p></div>
+          <button class="btn primary" data-open-form>＋ Tambah Tugas</button></div>
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="🔍 Cari nama tugas / mata kuliah..." aria-label="Cari tugas" />
+          <select id="filter-status" aria-label="Filter status"><option value="Semua">Semua status</option><option>Belum Selesai</option><option>Selesai</option></select>
+          <select id="filter-priority" aria-label="Filter prioritas"><option value="Semua">Semua prioritas</option><option>Tinggi</option><option>Sedang</option><option>Rendah</option></select>
+          <select id="sort" aria-label="Urutkan"><option value="asc">Deadline terdekat</option><option value="desc">Deadline terjauh</option></select>
+        </div>
+        <div id="task-list"></div>
+        <div id="empty-state" class="card empty"><div class="big">📭</div><h2 id="empty-title"></h2><p class="muted" id="empty-text"></p></div>
+      </section>
+
+      <section id="view-about" class="view" hidden>
+        <div class="head"><div><h1>Tentang Proyek</h1><p class="muted">Teknologi yang dipakai di aplikasi ini, dijelaskan sederhana.</p></div></div>
+        <div class="grid about">
+          <div class="card"><h3>Git</h3><p>Sistem <em>version control</em> yang mencatat setiap perubahan kode (commit), sehingga kita bisa kembali ke versi lama dan bekerja di banyak branch.</p></div>
+          <div class="card"><h3>GitHub</h3><p>Layanan online untuk menyimpan repository Git, berkolaborasi lewat Pull Request, dan men-deploy website (GitHub Pages).</p></div>
+          <div class="card"><h3>npm</h3><p><em>Package manager</em> Node.js. Perintah <code>npm install</code> mengunduh library, <code>npm run dev</code> menjalankan script di <code>package.json</code>.</p></div>
+          <div class="card"><h3>TypeScript</h3><p>JavaScript dengan tipe data. Di proyek ini: <code>interface Task</code>, tipe <code>Priority</code> dan <code>Status</code>, serta fungsi generics <code>loadData&lt;T&gt;</code>. Kesalahan tipe ketahuan sebelum aplikasi dijalankan.</p></div>
+          <div class="card"><h3>Vite</h3><p><em>Build tool</em> modern: server development yang sangat cepat dan membuat hasil build siap deploy lewat <code>npm run build</code> ke folder <code>dist</code>.</p></div>
+          <div class="card"><h3>Environment Variables</h3><p>Konfigurasi di file <code>.env</code> (mis. <code>VITE_APP_NAME</code>), dibaca dengan <code>import.meta.env</code>. Hanya variabel berawalan <code>VITE_</code> yang masuk ke browser, jadi jangan simpan rahasia di sana.</p></div>
+          <div class="card"><h3>Dependencies &amp; devDependencies</h3><p><code>dependencies</code> dibutuhkan aplikasi saat berjalan. <code>devDependencies</code> hanya untuk proses pengembangan/build. Proyek ini memakai <code>typescript</code> dan <code>vite</code> sebagai devDependencies karena hasil akhirnya hanya HTML, CSS, dan JS biasa.</p></div>
+          <div class="card"><h3>Semantic Versioning</h3><p>Format <code>MAJOR.MINOR.PATCH</code>, mis. <code>1.2.3</code>. MAJOR naik jika ada perubahan yang merusak kompatibilitas, MINOR jika menambah fitur, PATCH jika memperbaiki bug. Tanda <code>^5.5.4</code> berarti boleh update MINOR/PATCH, tapi tidak MAJOR.</p></div>
+          <div class="card"><h3>Compiler, Transpiler, Bundler</h3>
+            <p><strong>Compiler</strong>: menerjemahkan kode ke bentuk lain yang lebih rendah levelnya, mis. C ke kode mesin. <strong>Transpiler</strong>: menerjemahkan antar bahasa selevel; <code>tsc</code>/esbuild mengubah <code>main.ts</code> (TypeScript) menjadi JavaScript yang dipahami browser. <strong>Bundler</strong>: menggabungkan banyak file; Vite menyatukan <code>main.ts</code>, <code>taskManager.ts</code>, <code>storage.ts</code>, dan <code>style.css</code> menjadi sedikit file di <code>dist/</code>.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>My College Tasks · Tugas Pertemuan 6 Pengembangan Aplikasi Web</footer>
+
+    <dialog id="task-dialog">
+      <form id="task-form" novalidate>
+        <h2 id="dialog-title">Tambah Tugas</h2>
+        <label for="f-name">Nama Tugas *</label><input id="f-name" maxlength="100" /><div class="error" id="err-name"></div>
+        <label for="f-course">Mata Kuliah *</label><input id="f-course" maxlength="80" /><div class="error" id="err-course"></div>
+        <label for="f-desc">Deskripsi</label><textarea id="f-desc" rows="3" maxlength="500"></textarea>
+        <label for="f-deadline">Deadline *</label><input id="f-deadline" type="date" /><div class="error" id="err-deadline"></div>
+        <div class="row">
+          <div><label for="f-priority">Prioritas</label><select id="f-priority"><option>Rendah</option><option selected>Sedang</option><option>Tinggi</option></select></div>
+          <div><label for="f-status">Status</label><select id="f-status"><option>Belum Selesai</option><option>Selesai</option></select></div>
+        </div>
+        <div class="dialog-actions"><button type="button" class="btn" id="cancel-form">Batal</button><button type="submit" class="btn primary">Simpan</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="confirm-dialog">
+      <h2>Konfirmasi Hapus</h2><p id="confirm-text"></p>
+      <div class="dialog-actions"><button class="btn" id="confirm-no">Batal</button><button class="btn danger solid" id="confirm-yes">Ya, Hapus</button></div>
+    </dialog>
+
+    <div id="toast-container" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
