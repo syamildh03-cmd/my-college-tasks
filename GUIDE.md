@@ -121,3 +121,8 @@ File `.github/workflows/deploy.yml` sudah disiapkan.
 - [ ] `.gitignore` berisi `.env`; `.env.example` ter-upload
 - [ ] `npm run build` sukses
 - [ ] Website online dan URL dicatat
+
+## Riwayat Pengembangan
+
+Pengembangan fitur pengelolaan tugas dilakukan menggunakan Git
+dengan branch feature/task-management.
